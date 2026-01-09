@@ -1,0 +1,85 @@
+# Sample Test Data for Notion CRM Enrichment
+# Use this data to test the skills work correctly
+
+================================================================================
+TEST CASE 1: Add Lead
+================================================================================
+Command: /add-lead Sam Altman from OpenAI
+
+Provide this context when prompted:
+- P: Scaling AI infrastructure, shipping GPT models
+- U: Competition from Anthropic, Google; regulatory pressure
+- L: Looking at: massive compute investments, partnerships
+- L: Limitation: Need to deploy capital efficiently at scale
+
+================================================================================
+TEST CASE 2: Draft Message
+================================================================================
+Command: /draft-message Sam Altman
+
+Expected output:
+- Fetches Sam's lead from Notion
+- Reads Feedback Insights for patterns
+- Drafts message using 5-element framework
+- Self-rates before presenting
+
+================================================================================
+TEST CASE 3: Log Sent Message
+================================================================================
+Command: /update-crm Sam Altman sent on LinkedIn: "hey sam - honestly stuck on something..."
+
+Expected:
+- Creates message in Messages database
+- Rates message against framework
+- Updates Sam's status to Contacted
+- Provides rating breakdown
+
+================================================================================
+MESSAGE RATING TEST CASES
+================================================================================
+
+HIGH RATING MESSAGE (8-10):
+"hey sam - honestly stuck on something. we're building AI agents for financial ops and keep hearing 'security is the blocker' from enterprises. you've navigated this with chatgpt enterprise - was it mostly about SOC2 compliance, or something deeper about trust? trying to figure out if we should lead with security certs or case studies. appreciate any direction. best, ben"
+
+Analysis:
+- Vision: ✓ (AI agents for financial ops)
+- Framing: ✓ (implied learning, not selling)
+- Weakness: ✓✓ ("honestly stuck on something")
+- Pedestal: ✓ (specific reference to ChatGPT Enterprise)
+- Ask: ✓ (binary question: certs or case studies)
+Rating: 9/10
+
+MEDIUM RATING MESSAGE (5-7):
+"Hi Sam, I saw your recent interview about AI safety. We're building something in the AI finance space and would love to get your thoughts. We help startups save 6-8% on their treasury. Would you be open to a quick chat? Best, Ben"
+
+Analysis:
+- Vision: ✓ (AI finance)
+- Framing: ✗ (sounds like a pitch)
+- Weakness: ✗ (confident, no vulnerability)
+- Pedestal: ~ (generic "saw your interview")
+- Ask: ✗ ("quick chat" = bad)
+Rating: 5/10
+
+LOW RATING MESSAGE (1-4):
+"Dear Mr. Altman, I hope this message finds you well. I am reaching out because I believe our revolutionary AI-powered financial platform could be a great fit for OpenAI. We offer amazing returns of 8% APY. Please find our pitch deck attached. Looking forward to your response."
+
+Analysis:
+- Vision: ✗ (product-first)
+- Framing: ✗ (clear pitch)
+- Weakness: ✗ (overconfident)
+- Pedestal: ✗ (generic)
+- Ask: ✗ (vague)
+- Penalties: "revolutionary", "amazing", attachment
+Rating: 2/10
+
+================================================================================
+RATE MESSAGE TEST CASES
+================================================================================
+
+Reply received:
+/rate-message Sam replied: "hey thanks for the note, actually yeah we dealt with this..."
+
+No reply:
+/rate-message Sam no reply after a week
+
+Expected: Updates Messages DB result, updates Feedback Insights page

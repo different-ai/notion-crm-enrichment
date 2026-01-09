@@ -1,0 +1,9 @@
+# Generated config (contains your Notion IDs)
+.claude/config/workspace.json
+
+# OS files
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
