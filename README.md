@@ -96,17 +96,38 @@ claude mcp add notion --url https://mcp.notion.com/mcp
 
 When prompted, authenticate with your Notion account.
 
-### 3. Clone and Setup
+### 3. Install the Skills
+
+This repo stores distributable skills in `skills/`. Copy them into Claude Code's
+project or user skill directory before running them.
+
+For this project only:
 
 ```bash
 git clone https://github.com/different-ai/notion-crm-enrichment
 cd notion-crm-enrichment
 
-# Start Claude Code
-claude
+mkdir -p .claude/skills
+cp -R skills/* .claude/skills/
 
-# Run the setup wizard
-> /setup-crm
+# Start Claude Code in this repo
+claude
+```
+
+For all your projects:
+
+```bash
+git clone https://github.com/different-ai/notion-crm-enrichment
+cd notion-crm-enrichment
+
+mkdir -p ~/.claude/skills
+cp -R skills/* ~/.claude/skills/
+```
+
+### 4. Run the Setup Wizard
+
+```text
+/setup-crm
 ```
 
 The setup skill will:
@@ -222,20 +243,20 @@ Outreach CRM (Page)
 .
 ├── README.md
 ├── .gitignore
+├── skills/
+│   ├── setup-crm/
+│   │   └── SKILL.md           # Setup wizard
+│   ├── add-lead/
+│   │   └── SKILL.md           # Add leads
+│   ├── draft-message/
+│   │   └── SKILL.md           # Draft messages
+│   ├── update-crm/
+│   │   └── SKILL.md           # Log messages
+│   └── rate-message/
+│       └── SKILL.md           # Rate outcomes
 ├── .claude/
-│   ├── skills/
-│   │   ├── setup-crm/
-│   │   │   └── SKILL.md       # Setup wizard
-│   │   ├── add-lead/
-│   │   │   └── SKILL.md       # Add leads
-│   │   ├── draft-message/
-│   │   │   └── SKILL.md       # Draft messages
-│   │   ├── update-crm/
-│   │   │   └── SKILL.md       # Log messages
-│   │   └── rate-message/
-│   │       └── SKILL.md       # Rate outcomes
 │   └── config/
-│       └── workspace.json     # Generated config (gitignored)
+│       └── workspace.json     # Generated after /setup-crm (gitignored)
 └── sample/
     └── test-data.txt          # Sample data for testing
 ```
